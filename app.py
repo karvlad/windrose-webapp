@@ -7,7 +7,9 @@ from windrose import WindroseAxes
 from io import BytesIO
 from matplotlib import font_manager
 
-plt.rcParams["font.family"] = 'dejavu serif'
+#plt.rcParams["font.family"] = 'dejavu serif'
+plt.rcParams['font.family'] = 'serif'
+plt.rcParams['font.serif'] = ['Times New Roman'] + plt.rcParams['font.serif']
 
 st.set_page_config(page_title="Windrose maker", layout="centered")
 st.title("Генератор розы ветров")
