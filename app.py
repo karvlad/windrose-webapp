@@ -6,10 +6,21 @@ import matplotlib.ticker as mtick
 from windrose import WindroseAxes
 from io import BytesIO
 from matplotlib import font_manager
+import os
 
 tnr = font_manager.FontProperties(fname="tnr.ttf")
 plt.rcParams["font.family"] = tnr.get_name()
 
+
+if os.path.exists(FONT_PATH):
+    st.success(f"Font file found: {FONT_PATH}")
+    try:
+        tnr = font_manager.FontProperties(fname=FONT_PATH)
+        st.write("Loaded font name:", tnr.get_name())
+    except Exception as e:
+        st.error(f"Error loading font: {e}")
+else:
+    st.error(f"Font file NOT found at: {os.path.abspath(FONT_PATH)}")
 
 
 st.set_page_config(page_title="Windrose maker", layout="centered")
