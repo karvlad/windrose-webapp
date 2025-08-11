@@ -53,7 +53,7 @@ if uploaded_file is not None:
             st.download_button(
                 label="📥 Скачать график (PNG)",
                 data=buf.getvalue(),
-                file_name=f'{user_title}.png',
+                file_name=f'{user_title}_export.png',
                 mime="image/png"
             )
         else:
