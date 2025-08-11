@@ -23,10 +23,10 @@ if uploaded_file is not None:
             ax = WindroseAxes.from_ax(fig=fig)
             max_value = df["value"].max()
             if max_value <= 2:
-                bins = [0.5, 1, 1.5, 2]
+                bins = [0, 0.5, 1, 1.5, 2]
             else:
                 bins = [0, 2, 4, 6, 8]
-            ax.bar(df["deg"].values, df["value"].values, normed=True, bins=bins, calm_limit=0.5)
+            ax.bar(df["deg"].values, df["value"].values, normed=True, bins=bins)
             ax.set_xticklabels(["В", "СВ", "С", "СЗ", "З", "ЮЗ", "Ю", "ЮВ"])
             ax.set_title(user_title)
             ax.set_legend(title=user_legend, bbox_to_anchor=(0.8, -0.15))
