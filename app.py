@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import matplotlib.ticker as mtick
 from windrose import WindroseAxes
 from io import BytesIO
-
+plt.rcParams["font.family"] = "Times New Roman"
 st.set_page_config(page_title="Windrose maker", layout="centered")
 st.title("Генератор розы ветров")
 user_title = st.text_input('Заголовок розы (ветер\течения\волн таких-то станций)')
@@ -51,7 +51,7 @@ if uploaded_file is not None:
             st.download_button(
                 label="📥 Скачать график (PNG)",
                 data=buf.getvalue(),
-                file_name=user_title,
+                file_name=f'{user_title}.png',
                 mime="image/png"
             )
         else:
