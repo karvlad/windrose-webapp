@@ -22,8 +22,8 @@ if uploaded_file is not None:
             fig = plt.figure(figsize=(8, 8))
             ax = WindroseAxes.from_ax(fig=fig)
             max_speed = df["speed"].max()
-            if max_speed > 3:
-                bins = [0.5, 1, 1.5, 2, 2.5, 3]
+            if max_speed <= 2:
+                bins = [0.5, 1, 1.5, 2]
             else:
                 bins = [0, 2, 4, 6, 8]
             ax.bar(df["deg"].values, df["speed"].values, normed=True, bins=bins)
