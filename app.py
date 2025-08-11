@@ -21,6 +21,7 @@ if uploaded_file is not None:
         if {"deg", "speed"}.issubset(df.columns):
             fig = plt.figure(figsize=(8, 8))
             ax = WindroseAxes.from_ax(fig=fig)
+            max_speed = df["speed"].max()
             if max_speed > 3:
                 bins = [0.5, 1, 1.5, 2, 2.5, 3]
             else:
