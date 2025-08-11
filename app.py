@@ -21,7 +21,11 @@ if uploaded_file is not None:
         if {"deg", "speed"}.issubset(df.columns):
             fig = plt.figure(figsize=(8, 8))
             ax = WindroseAxes.from_ax(fig=fig)
-            ax.bar(df["deg"].values, df["speed"].values, normed=True, bins=[0, 2, 4, 6, 8])
+            if max_speed > 3:
+                bins = [0.5, 1, 1.5, 2, 2.5, 3]
+            else:
+                bins = [0, 2, 4, 6, 8]
+            ax.bar(df["deg"].values, df["speed"].values, normed=True, bins=bins)
             ax.set_xticklabels(["В", "СВ", "С", "СЗ", "З", "ЮЗ", "Ю", "ЮВ"])
             ax.set_title(user_title)
             ax.set_legend(title=user_legend, bbox_to_anchor=(0.8, -0.15))
@@ -38,7 +42,7 @@ if uploaded_file is not None:
             st.download_button(
                 label="📥 Скачать график (PNG)",
                 data=buf.getvalue(),
-                file_name="windrose_cntl.png",
+                file_name=user_title,
                 mime="image/png"
             )
         else:
