@@ -22,7 +22,7 @@ if uploaded_file is not None:
             fig = plt.figure(figsize=(8, 8))
             ax = WindroseAxes.from_ax(fig=fig)
             ax.bar(df["deg"].values, df["speed"].values, normed=True, bins=[0, 2, 4, 6, 8])
-            ax.set_xticklabels(["Восток", "СВ", "Север", "СЗ", "Запад", "ЮЗ", "Юг", "ЮВ"])
+            ax.set_xticklabels(["В", "СВ", "С", "СЗ", "З", "ЮЗ", "Ю", "ЮВ"])
             ax.set_title(user_title)
             ax.set_legend(title=user_legend, bbox_to_anchor=(0.8, -0.15))
             fmt = "%.0f%%"
