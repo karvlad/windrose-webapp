@@ -8,8 +8,8 @@ from io import BytesIO
 from matplotlib import font_manager
 
 font_path = "tnr.ttf"
-times_new_roman = font_manager.FontProperties(fname=font_path)
-plt.rcParams["font.family"] = times_new_roman.get_name()
+tnr = font_manager.FontProperties(fname=font_path)
+plt.rcParams["font.family"] = tnr.get_name()
 
 
 
