@@ -7,11 +7,8 @@ from windrose import WindroseAxes
 from io import BytesIO
 from matplotlib import font_manager
 
-font_path = "tnr.ttf"
-tnr = font_manager.FontProperties(fname=font_path)
+tnr = font_manager.FontProperties(fname="tnr.ttf")
 plt.rcParams["font.family"] = tnr.get_name()
-
-
 
 
 
