@@ -18,15 +18,15 @@ if uploaded_file is not None:
         st.write("### Предпросмотр данных:")
         st.dataframe(df.head())
 
-        if {"deg", "speed"}.issubset(df.columns):
+        if {"deg", "value"}.issubset(df.columns):
             fig = plt.figure(figsize=(8, 8))
             ax = WindroseAxes.from_ax(fig=fig)
-            max_speed = df["speed"].max()
-            if max_speed <= 2:
+            max_value = df["value"].max()
+            if max_value <= 2:
                 bins = [0.5, 1, 1.5, 2]
             else:
                 bins = [0, 2, 4, 6, 8]
-            ax.bar(df["deg"].values, df["speed"].values, normed=True, bins=bins)
+            ax.bar(df["deg"].values, df["value"].values, normed=True, bins=bins)
             ax.set_xticklabels(["В", "СВ", "С", "СЗ", "З", "ЮЗ", "Ю", "ЮВ"])
             ax.set_title(user_title)
             ax.set_legend(title=user_legend, bbox_to_anchor=(0.8, -0.15))
@@ -47,7 +47,7 @@ if uploaded_file is not None:
                 mime="image/png"
             )
         else:
-            st.error("В файле должны быть столбцы `deg` (направление) и `speed` (скорость).")
+            st.error("В файле должны быть столбцы `deg` (направление в градусах) и `value` (скорость ветра\течения или высота волны).")
     except Exception as e:
         st.error(f"Ошибка при чтении файла: {e}")
 else:
