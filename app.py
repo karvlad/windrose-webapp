@@ -9,7 +9,7 @@ from io import BytesIO
 st.set_page_config(page_title="Windrose maker", layout="centered")
 st.title("Генератор розы ветров")
 user_title = st.text_input('Заголовок розы (ветер\волны таких-то станций)')
-
+user_legend = st.text_input('Подпись легенды (скорость ветра\течения или высота волн)')
 uploaded_file = st.file_uploader("📂 Загрузите Excel-файл", type=["xlsx", "xls"])
 
 if uploaded_file is not None:
@@ -24,7 +24,7 @@ if uploaded_file is not None:
             ax.bar(df["deg"].values, df["speed"].values, normed=True, bins=[0, 2, 4, 6, 8])
             ax.set_xticklabels(["В", "СВ", "С", "СЗ", "З", "ЮЗ", "Ю", "ЮВ"])
             ax.set_title(user_title)
-            ax.set_legend(title="Скорость ветра (м/с)", bbox_to_anchor=(0.8, -0.15))
+            ax.set_legend(title=user_legend, bbox_to_anchor=(0.8, -0.15))
             fmt = "%.0f%%"
             yticks = mtick.FormatStrFormatter(fmt)
             ax.yaxis.set_major_formatter(yticks)
