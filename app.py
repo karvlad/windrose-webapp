@@ -36,6 +36,8 @@ if uploaded_file is not None:
             fmt = "%.0f%%"
             yticks = mtick.FormatStrFormatter(fmt)
             ax.yaxis.set_major_formatter(yticks)
+            for label in ax.get_yticklabels():
+                label.set_fontsize(8)
             ax.text(0.75, -0.18, "% - Процент повторяемости", transform=ax.transAxes)
 
             st.pyplot(fig)
