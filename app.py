@@ -5,7 +5,15 @@ import matplotlib.pyplot as plt
 import matplotlib.ticker as mtick
 from windrose import WindroseAxes
 from io import BytesIO
-plt.rcParams["font.family"] = "DejaVu Serif"
+from matplotlib import font_manager
+
+font_path = "tnr.ttf"
+times_new_roman = font_manager.FontProperties(fname=font_path)
+plt.rcParams["font.family"] = times_new_roman.get_name()
+
+
+
+
 
 st.set_page_config(page_title="Windrose maker", layout="centered")
 st.title("Генератор розы ветров")
