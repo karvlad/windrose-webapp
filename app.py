@@ -12,6 +12,10 @@ user_title = st.text_input('Заголовок розы (ветер\течени
 user_legend = st.text_input('Подпись легенды (скорость\высота ветра\течения)')
 uploaded_file = st.file_uploader("📂 Загрузите Excel-файл", type=["xlsx", "xls"])
 
+directions = [
+    "В", "ВСВ", "СВ", "ССВ", "С", "ССЗ", "СЗ", "ЗСЗ", 
+    "З", "ЗЮЗ", "ЮЗ", "ЮЮЗ", "Ю", "ЮЮВ", "ЮВ", "ВЮВ"
+]
 if uploaded_file is not None:
     try:
         df = pd.read_excel(uploaded_file)
@@ -28,6 +32,7 @@ if uploaded_file is not None:
                 bins = [0, 2, 4, 6, 8]
             ax.bar(df["deg"].values, df["value"].values, normed=True, bins=bins)
             ax.set_xticklabels(["В", "ВСВ", "СВ", "ССВ", "С", "ССЗ", "СЗ", "ЗСЗ", "З", "ЗЮЗ", "ЮЗ", "ЮЮЗ", "Ю", "ЮЮВ", "ЮВ", "ВЮВ"])
+            ax.set_thetagrids(16, labels=directions)
             ax.set_title(user_title)
             ax.set_legend(title=user_legend, bbox_to_anchor=(0.8, -0.15))
             fmt = "%.0f%%"
