@@ -5,7 +5,8 @@ import matplotlib.pyplot as plt
 import matplotlib.ticker as mtick
 from windrose import WindroseAxes
 from io import BytesIO
-plt.rcParams["font.family"] = "Times New Roman"
+plt.rcParams["font.family"] = ["Liberation Times"]
+
 st.set_page_config(page_title="Windrose maker", layout="centered")
 st.title("Генератор розы ветров")
 user_title = st.text_input('Заголовок розы (ветер\течения\волн таких-то станций)')
