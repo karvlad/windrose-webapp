@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import matplotlib.ticker as mtick
 from windrose import WindroseAxes
 from io import BytesIO
-
+plt.rcParams["font.family"] = "Times New Roman"
 st.set_page_config(page_title="Windrose maker", layout="centered")
 st.title("Генератор розы ветров")
 user_title = st.text_input('Заголовок розы (ветер\течения\волн таких-то станций)')
@@ -41,6 +41,8 @@ if uploaded_file is not None:
             for label in ax.get_yticklabels():
                 label.set_fontsize(8)
             ax.text(0.75, -0.18, "% - Процент повторяемости", transform=ax.transAxes)
+            leg = ax.legend(fontsize=10, title="Скорость (м/с)")
+            plt.setp(leg.get_title(), fontsize=10)
 
             st.pyplot(fig)
 
