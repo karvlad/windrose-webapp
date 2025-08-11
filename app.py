@@ -29,7 +29,7 @@ if uploaded_file is not None:
                 bins = [0, 2, 4, 6, 8]
             ax.bar(df["deg"].values, df["value"].values, normed=True, bins=bins)
             ax.set_xticklabels(["В", "ВСВ", "СВ", "ССВ", "С", "ССЗ", "СЗ", "ЗСЗ", "З", "ЗЮЗ", "ЮЗ", "ЮЮЗ", "Ю", "ЮЮВ", "ЮВ", "ВЮВ"])
-            ax.set_thetagrids(16, labels=directions)
+            ax.set_thetagrids([0, 22.5, 45, 67.5, 90, 112.5, 135, 157.5,180, 202.5, 225, 247.5, 270, 292.5, 315, 337.5],labels=directions)
             ax.set_title(user_title)
             ax.set_legend(title=user_legend, bbox_to_anchor=(0.8, -0.15))
             fmt = "%.0f%%"
