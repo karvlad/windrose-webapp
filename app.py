@@ -18,6 +18,8 @@ if uploaded_file is not None:
         df = pd.read_excel(uploaded_file)
         st.write("### Предпросмотр данных:")
         st.dataframe(df.head())
+        plt.rcParams["font.family"] = "Times New Roman"
+
 
         if {"deg", "value"}.issubset(df.columns):
             fig = plt.figure(figsize=(8, 8))
