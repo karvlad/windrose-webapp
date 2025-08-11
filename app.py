@@ -10,7 +10,7 @@ import os
 
 tnr = font_manager.FontProperties(fname="tnr.ttf")
 plt.rcParams["font.family"] = tnr.get_name()
-
+FONT_PATH = "tnr.ttf"
 
 if os.path.exists(FONT_PATH):
     st.success(f"Font file found: {FONT_PATH}")
