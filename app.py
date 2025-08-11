@@ -8,8 +8,8 @@ from io import BytesIO
 
 st.set_page_config(page_title="Windrose maker", layout="centered")
 st.title("Генератор розы ветров")
-user_title = st.text_input('Заголовок розы (ветер\течения таких-то станций)')
-user_legend = st.text_input('Подпись легенды (скорость ветра\течения)')
+user_title = st.text_input('Заголовок розы (ветер\течения\волн таких-то станций)')
+user_legend = st.text_input('Подпись легенды (скорость\высота ветра\течения)')
 uploaded_file = st.file_uploader("📂 Загрузите Excel-файл", type=["xlsx", "xls"])
 
 if uploaded_file is not None:
