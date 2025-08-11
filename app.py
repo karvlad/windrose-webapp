@@ -1,39 +1,48 @@
 # app.py
-
 import streamlit as st
 import pandas as pd
-from windrose import WindroseAxes
 import matplotlib.pyplot as plt
+import matplotlib.ticker as mtick
+from windrose import WindroseAxes
 from io import BytesIO
 
-st.set_page_config(page_title="Windrose Plot Generator", layout="centered")
-st.title("🌬️ Windrose Plot Generator")
-st.markdown("Upload your CSV with `wd` (wind direction) and `ws` (wind speed) columns.")
+st.set_page_config(page_title="Windrose CNTL", layout="centered")
+st.title("🌬️ Роза ветров контрольных точек (CNTL)")
 
-uploaded_file = st.file_uploader("Choose a CSV file", type="csv")
+uploaded_file = st.file_uploader("📂 Загрузите Excel-файл", type=["xlsx", "xls"])
 
 if uploaded_file is not None:
     try:
-        df = pd.read_csv(uploaded_file, decimal=',', delimiter=';')
-        st.write("### Preview of uploaded data:")
+        df = pd.read_excel(uploaded_file)
+        st.write("### Предпросмотр данных:")
         st.dataframe(df.head())
 
-        if 'ws' in df.columns and 'wd' in df.columns:
+        if {"deg", "speed"}.issubset(df.columns):
             fig = plt.figure(figsize=(8, 8))
             ax = WindroseAxes.from_ax(fig=fig)
-            ax.bar(df['wd'], df['ws'])
-            ax.set_legend()
+            ax.bar(df["deg"].values, df["speed"].values, normed=True, bins=[0, 2, 4, 6, 8])
+            ax.set_xticklabels(["В", "СВ", "С", "СЗ", "З", "ЮЗ", "Ю", "ЮВ"])
+            ax.set_title("Роза ветров контрольных точек (CNTL)")
+            ax.set_legend(title="Скорость ветра (м/с)", bbox_to_anchor=(0.8, -0.15))
+            fmt = "%.0f%%"
+            yticks = mtick.FormatStrFormatter(fmt)
+            ax.yaxis.set_major_formatter(yticks)
+            ax.text(0.75, -0.18, "% - Процент повторяемости", transform=ax.transAxes)
+
             st.pyplot(fig)
 
             buf = BytesIO()
-            fig.savefig(buf, format="png")
+            fig.savefig(buf, format="png", bbox_inches="tight")
+            buf.seek(0)
             st.download_button(
-                label="📥 Download Windrose Plot (PNG)",
+                label="📥 Скачать график (PNG)",
                 data=buf.getvalue(),
-                file_name="windrose_plot.png",
+                file_name="windrose_cntl.png",
                 mime="image/png"
             )
         else:
-            st.error("Your CSV must include columns named `wd` (wind direction) and `ws` (wind speed).")
+            st.error("В файле должны быть столбцы `deg` (направление) и `speed` (скорость).")
     except Exception as e:
-        st.error(f"Error reading file: {e}")
+        st.error(f"Ошибка при чтении файла: {e}")
+else:
+    st.info("Загрузите файл Excel для построения розы ветров.")
